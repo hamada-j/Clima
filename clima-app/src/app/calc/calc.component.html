@@ -1,1 +1,16 @@
-<p>calc works!</p>
+<mat-tab-group mat-align-tabs="end">
+  <mat-tab label="Calculation">
+    <ng-template mat-tab-label>
+      <mat-icon class="material-icons">calculate</mat-icon>
+    </ng-template>
+    <div>some content</div>
+  </mat-tab>
+
+  <mat-tab label="History">
+    <ng-template mat-tab-label>
+      <mat-icon class="material-icons">history</mat-icon>
+    </ng-template>
+    <app-history></app-history>
+  </mat-tab>
+</mat-tab-group>
+<mat-tab> </mat-tab>
