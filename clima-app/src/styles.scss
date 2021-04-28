@@ -11,6 +11,7 @@ body {
   background-color: rgb(138, 138, 138);
 }
 .canvas {
+  z-index: 10;
   width: 100%;
   height: 100%;
   border: 1px solid #000;
@@ -25,8 +26,9 @@ body {
   animation-timing-function: linear;
 }
 .eclipse {
-  width: 50%;
-  height: 50%;
+  z-index: 10;
+  width: 70%;
+  height: 70%;
   /*border: 1px solid #000;*/
   position: absolute;
   left: 60%;
@@ -37,33 +39,19 @@ body {
   z-index: 0;
   animation-timing-function: linear;
 }
-.sun {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background-color: #ffa;
-  position: absolute;
-  top: -35px;
-  left: -35px;
-}
-.sun.a {
-  bottom: -35px;
-  right: -35px;
-  left: auto;
-  top: auto;
-}
+
 .moon {
   position: absolute;
-  top: -35px;
-  right: -35px;
+  top: -45px;
+  right: -15px;
   width: 70px;
   height: 70px;
   border-radius: 50%;
   background-color: #fff;
 }
 .moon.a {
-  bottom: -35px;
-  left: -35px;
+  bottom: -45px;
+  left: -15px;
   top: auto;
   right: auto;
 }
@@ -90,7 +78,7 @@ body {
   left: 20px;
   top: 20px;
   animation-name: blinker;
-  animation-duration: 20s;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
 }
 .star::after {
@@ -103,7 +91,7 @@ body {
   left: -200px;
   top: 50px;
   animation-name: blinker;
-  animation-duration: 20s;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
 }
 .star.a {
@@ -130,4 +118,15 @@ body {
   100% {
     transform: rotate(180deg);
   }
+}
+.app {
+  position: relative;
+  height: 100%;
+}
+.root {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
 }

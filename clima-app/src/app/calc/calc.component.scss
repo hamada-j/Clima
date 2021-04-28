@@ -1,0 +1,10 @@
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+.material-icons {
+  color: #fff;
+}
+
+:host ::ng-deep .mat-tab-label {
+  background-color: #383c46 !important;
+}
