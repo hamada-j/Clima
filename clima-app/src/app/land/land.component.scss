@@ -1,3 +1,27 @@
-.mat-tab-group {
-  margin-bottom: 48px;
+#wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  height: 20px;
+  width: 100px;
+  margin: -20px -50px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+}
+
+button {
+  margin: 0 auto;
+}
+
+div {
+  text-align: center;
 }
