@@ -13,6 +13,7 @@ import { HistoryComponent } from './history/history.component';
 import { LandComponent } from './land/land.component';
 
 // Angular Material (UI)
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LandComponent } from './land/land.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
