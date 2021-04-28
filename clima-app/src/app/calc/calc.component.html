@@ -3,7 +3,7 @@
     <ng-template mat-tab-label>
       <mat-icon class="material-icons">calculate</mat-icon>
     </ng-template>
-    <div>
+    <div class="calc">
       <mat-form-field class="example-form-field">
         <mat-label>Clearable input</mat-label>
         <input matInput type="text" [(ngModel)]="value" />
@@ -18,6 +18,12 @@
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
+      <section>
+        <div class="example-label">Raised</div>
+        <div class="example-button-row">
+          <button mat-raised-button>Add Input</button>
+        </div>
+      </section>
     </div>
   </mat-tab>
 
