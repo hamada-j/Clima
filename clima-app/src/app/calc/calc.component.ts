@@ -44,9 +44,41 @@ export class CalcComponent  {
     }
   }
 
+  onSubmit(formValues) {
+    const regEx = /^\d+\.\d+$|^\d+$/;
+    let jsonObject: Object = {};
+    let arrayOnlyNumbers: Array<number> = [];
+    let query: string = "";
+    let valueFirst: string = formValues.userInputValue.trim();
+    query += valueFirst
+    if (regEx.test(valueFirst)) arrayOnlyNumbers.push(Number(valueFirst))
+    if (this.arrIds.length > 0 || arrayOnlyNumbers.length > 0) {
+      for (let i: number = 0; i < this.arrIds.length; i++){
+        let valueInputArray = this.document.getElementById(this.arrIds[i]).value.trim()
+        query = query + ", " + valueInputArray;
+        if (regEx.test(valueInputArray)) arrayOnlyNumbers.push(Number(valueInputArray))
+      }
+      this.result = arrayOnlyNumbers.reduce((a, b) => a + b, 0);
+      let numbers = arrayOnlyNumbers.map(num => num.toString()).join(', ');
+      this.resultCalc = true;
 
-    onSubmit(formValues) {console.log(formValues)}
+      jsonObject = {
+        query: query,
+        numbers: numbers,
+        result: this.result
+      }
+      console.log(jsonObject);
 
+    } else {
+      jsonObject = {
+          query: query,
+          numbers: null,
+          result: null
+        };
+        console.log(jsonObject);
+    }
+
+  }
 
 
 
