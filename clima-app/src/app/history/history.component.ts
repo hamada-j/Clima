@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-history',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private restFullApi: ApiService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    await this.restFullApi.getAllHistory().then(res => console.log(res)).catch(err => {
+          console.log(err);
+      });
   }
 
 }

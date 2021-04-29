@@ -4,9 +4,6 @@ import { HttpClient, HttpHeaders  } from "@angular/common/http";
 import { environment } from "../environments/environment";
 
 
-
-
-
 const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
@@ -21,6 +18,16 @@ export class ApiService {
 
 
   constructor(private httpClient: HttpClient) {}
+
+  getAllHistory(): Promise<any[]> {
+    return this.httpClient.get<any[]>(`${this.baseUrl}`,this.createHeaders()).toPromise();
+  }
+
+  createHeaders() {
+    return {
+      headers: new HttpHeaders({'Content-Type': 'text/json'})
+    };
+  }
 
 
 }
