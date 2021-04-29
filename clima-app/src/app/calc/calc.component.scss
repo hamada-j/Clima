@@ -1,3 +1,50 @@
 .example-form-field {
   width: 200px;
 }
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+.material-icons {
+  color: #fff;
+}
+
+:host ::ng-deep .mat-tab-label {
+  background-color: #383c46 !important;
+}
+.mat-form-field {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.calc {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 10%;
+  margin-top: 5%;
+}
+.Iputs {
+  margin-right: 10px;
+}
+
+.sectionButtons {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10%;
+}
+.sectionButtons section {
+  margin: 2%;
+}
+
+span {
+  font-size: 40px;
+}
+
+.btnCalc {
+  margin-top: 10px;
+}
