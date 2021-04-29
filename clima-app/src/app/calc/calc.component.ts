@@ -9,7 +9,5 @@ export class CalcComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }
