@@ -6,11 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calc.component.scss']
 })
 export class CalcComponent implements OnInit {
-  value = 'Clear me';
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }
