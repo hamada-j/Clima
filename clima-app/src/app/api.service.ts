@@ -4,9 +4,6 @@ import { HttpClient, HttpHeaders  } from "@angular/common/http";
 import { environment } from "../environments/environment";
 
 
-
-
-
 const BACKEND_URL = environment.apiUrl;
 
 @Injectable({
@@ -15,12 +12,28 @@ const BACKEND_URL = environment.apiUrl;
 
 export class ApiService {
 
-
-
   baseUrl = BACKEND_URL;
 
 
   constructor(private httpClient: HttpClient) {}
+
+  getAllHistory(): Promise<any> {
+    return this.httpClient.get<any>(`${this.baseUrl}`, ).toPromise();
+  }
+
+   postOne(inputValueObject): Promise<any> {
+    return this.httpClient.post<any>(`${this.baseUrl}`, inputValueObject, ).toPromise();
+  }
+
+
+  createHeaders() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'text/json',
+        'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'content-type',})
+    };
+  }
 
 
 }
