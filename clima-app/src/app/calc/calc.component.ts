@@ -9,12 +9,16 @@ import { generateId } from '../utils/generateId';
 })
 export class CalcComponent  {
 
-  arrIds = [];
-  resultCalc: boolean = false;
-  result: number = 0;
+  arrIds: Array<string>;
+  resultCalc: boolean;
+  result: number;
 
   @ViewChild('divInput') toAddElement:ElementRef;
-  constructor(private elementRef: ElementRef, private renderer: Renderer2, @Inject(DOCUMENT) private document) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2, @Inject(DOCUMENT) private document) {
+    this.arrIds = [];
+    this.resultCalc = false;
+    this.result = 0
+  }
 
 
 
