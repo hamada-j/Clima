@@ -3,6 +3,52 @@
     <ng-template mat-tab-label>
       <mat-icon class="material-icons">calculate</mat-icon>
     </ng-template>
+    <div class="allElements">
+      <div class="calc">
+        <form
+          novalidate
+          #formUser="ngForm"
+          (ngSubmit)="onSubmit(formUser.value)"
+        >
+          <div class="Iputs" #divInput id="inputUser">
+            <input type="text" name="userInputValue" ngModel />
+          </div>
+          <button
+            class="btnCalc"
+            type="submit"
+            mat-raised-button
+            color="primary"
+          >
+            <span class="material-icons"> functions </span>
+            <span class="material-icons"> post_add </span>
+          </button>
+        </form>
+      </div>
+
+      <div class="sectionButtons">
+        <section>
+          <div class="example-button-row">
+            <button mat-raised-button (click)="addElementMethod($event)">
+              Add Input
+            </button>
+          </div>
+        </section>
+
+        <section>
+          <div class="example-button-row">
+            <button mat-raised-button (click)="removeElementMethod($event)">
+              Remove Input
+            </button>
+          </div>
+        </section>
+
+        <section *ngIf="resultCalc" class="result">
+          <h3>
+            RESULT OF CALCULATE YOUR INPUT IS = <span>{{ result }}</span>
+          </h3>
+        </section>
+      </div>
+    </div>
   </mat-tab>
 
   <mat-tab label="History">
