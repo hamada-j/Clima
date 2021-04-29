@@ -8,12 +8,8 @@ import { ApiService } from '../api.service';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor(private restFullApi: ApiService) { }
+  constructor() { }
 
-  async ngOnInit() {
-    await this.restFullApi.getAllHistory().then(res => console.log(res)).catch(err => {
-          console.log(err);
-      });
-  }
+  ngOnInit() {}
 
 }
