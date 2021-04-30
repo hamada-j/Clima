@@ -14,6 +14,7 @@ export class CalcComponent  {
   arrIds: Array<string>;
   resultCalc: boolean;
   result: number;
+  showMessage: string;
 
   @ViewChild('divInput') toAddElement:ElementRef;
   constructor(
@@ -26,6 +27,7 @@ export class CalcComponent  {
     this.arrIds = [];
     this.resultCalc = false;
     this.result = 0
+    this.showMessage = "";
 
   }
 
@@ -37,7 +39,6 @@ export class CalcComponent  {
         let idInput = generateId();
         this.toAddElement.nativeElement.insertAdjacentHTML('beforeend', `<input type="text" id="${idInput}" ngModel />`);
         this.arrIds.push(idInput);
-        console.log(this.arrIds);
       }
 
     }
@@ -49,28 +50,33 @@ export class CalcComponent  {
       let id = element.lastChild.id
       this.arrIds.splice(this.arrIds.indexOf(id), 1);
       element.removeChild(element.lastChild);
-      console.log(this.arrIds)
     }
   }
 
   async onSubmit(formValues) {
+
     const regEx = /^\d+\.\d+$|^\d+$/;
     let jsonObject: Object = {};
     let arrayOnlyNumbers: Array<number> = [];
     let query: string = "";
     let valueFirst: string = formValues.userInputValue.trim();
     query += valueFirst
+
     if (regEx.test(valueFirst)) arrayOnlyNumbers.push(Number(valueFirst))
+
     if (this.arrIds.length > 0 || arrayOnlyNumbers.length > 0) {
+
       for (let i: number = 0; i < this.arrIds.length; i++){
+
         let valueInputArray = this.document.getElementById(this.arrIds[i]).value.trim()
         query = query + ", " + valueInputArray;
         if (regEx.test(valueInputArray)) arrayOnlyNumbers.push(Number(valueInputArray))
-      }
-      this.result = arrayOnlyNumbers.reduce((a, b) => a + b, 0);
-      let numbers = arrayOnlyNumbers.map(num => num.toString()).join(', ');
-      this.resultCalc = true;
 
+      }
+
+      this.result = arrayOnlyNumbers.reduce((a, b) => a + b, 0);
+      let numbers: string = arrayOnlyNumbers.map(num => num.toString()).join(', ');
+      this.resultCalc = true;
 
       jsonObject = {
         clima: {
@@ -81,9 +87,20 @@ export class CalcComponent  {
       };
 
       await this.apiService.postOne(jsonObject).then((res) => {
-        console.log(res)
+
+        this.showMessage = `Your Query is: " ${res['query']} "`;
+        this.resetResponse(5000);
+
       }).catch((err) => {
-        console.log(err) });
+
+        if(err.error.query[0]){
+            this.showMessage = `Somme error happened: ${err.error.query[0]}. ${err.statusText}. Please try again.`;
+            this.resetResponse(3000);
+          } else {
+             this.showMessage = `Somme error happened: ${err.statusText}. Please try again.`;
+             this.resetResponse(3000);
+          }
+      });
 
     } else {
 
@@ -96,12 +113,29 @@ export class CalcComponent  {
         };
 
       await this.apiService.postOne(jsonObject).then((res) => {
-        console.log(res)
+
+         this.showMessage = `Your Query is: " ${res['query']} "`;
+         this.resetResponse(5000);
+
       }).catch((err) => {
-        console.log(err) });
+
+          if(err.error.query[0]){
+            this.showMessage = `Somme error happened: ${err.error.query[0]}. ${err.statusText}. Please try again.`;
+            this.resetResponse(3000);
+          } else {
+            this.showMessage = `Somme error happened: ${err.statusText}. Please try again.`;
+            this.resetResponse(3000);
+          }
+          });
 
     }
 
+  }
+
+  resetResponse(time: number){
+    setTimeout(async () => {
+      this.showMessage = ""
+    }, time);
   }
 
 
