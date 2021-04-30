@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders  } from "@angular/common/http";
 
 import { environment } from "../environments/environment";
 
+import { Clima } from "./models/clima";
 
 const BACKEND_URL = environment.apiUrl;
 
@@ -17,11 +18,11 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAllHistory(): Promise<any> {
-    return this.httpClient.get<any>(`${this.baseUrl}`, ).toPromise();
+  getAllHistory(): Promise<Clima[]> {
+    return this.httpClient.get<Clima[]>(`${this.baseUrl}`, ).toPromise();
   }
 
-   postOne(inputValueObject): Promise<any> {
+   postOne(inputValueObject: object): Promise<any> {
     return this.httpClient.post<any>(`${this.baseUrl}`, inputValueObject, ).toPromise();
   }
 

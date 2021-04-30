@@ -1,28 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
+import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
+import { History } from '../models/interfaceHistory'
+
+import { ApiService } from '../api.service';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.scss']
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent implements OnInit, AfterViewInit {
 
-  constructor(private api: ApiService) { }
+  displayedColumns: string[] = ['id', 'query', 'numbers', 'result'];
+  dataSource: MatTableDataSource<History>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private api: ApiService) {
+    this.dataSource = new MatTableDataSource([]);
+   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+
 
   async ngOnInit() {
 
-    // test
-
-    let obj = {
-      clima: {
-        query: "1, 2, ab",
-        numbers: "1, 2",
-        result: 3
-      }
-    }
     // await this.api.getAllHistory().then(result => console.log(result)).catch((error) => console.log(error));
-    // await this.api.postOne(obj).then(result => console.log(result)).catch((error) => console.log(error));
 
   }
 

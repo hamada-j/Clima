@@ -7,7 +7,8 @@ class ClimasController < ApplicationController
     @climas = Clima.all
     #@climas = Clima.order(resul: :DESC)
 
-    render json:  {status: 'success', messages: 'history', data: @climas }
+    #render json:  {status: 'success', messages: 'history', data: @climas }
+    render json: @climas
   end
 
   # POST /climas
