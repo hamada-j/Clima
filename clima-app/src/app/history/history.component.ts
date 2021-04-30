@@ -8,8 +8,22 @@ import { ApiService } from '../api.service';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: ApiService) { }
 
-  ngOnInit() {}
+  async ngOnInit() {
+
+    // test
+
+    let obj = {
+      clima: {
+        query: "1, 2, ab",
+        numbers: "1, 2",
+        result: 3
+      }
+    }
+    await this.api.getAllHistory().then(result => console.log(result)).catch((error) => console.log(error));
+    await this.api.postOne(obj).then(result => console.log(result)).catch((error) => console.log(error));
+
+  }
 
 }
