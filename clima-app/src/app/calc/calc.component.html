@@ -28,7 +28,23 @@
       <div class="sectionButtons">
         <section>
           <div class="example-button-row">
-            <button mat-raised-button (click)="addElementMethod($event)">
+            <button
+              mat-raised-button
+              style="background: rgb(228, 222, 191)"
+              (click)="getLastResultMethod($event)"
+            >
+              <span class="material-icons"> restart_alt </span>
+            </button>
+          </div>
+        </section>
+
+        <section>
+          <div class="example-button-row">
+            <button
+              mat-raised-button
+              style="background: rgb(202, 238, 205)"
+              (click)="addElementMethod($event)"
+            >
               Add Input
             </button>
           </div>
@@ -36,7 +52,11 @@
 
         <section>
           <div class="example-button-row">
-            <button mat-raised-button (click)="removeElementMethod($event)">
+            <button
+              mat-raised-button
+              style="background: rgb(224, 188, 188)"
+              (click)="removeElementMethod($event)"
+            >
               Remove Input
             </button>
           </div>
