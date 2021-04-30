@@ -60,6 +60,7 @@ export class CalcComponent  {
     let arrayOnlyNumbers: Array<number> = [];
     let query: string = "";
     let valueFirst: string = formValues.userInputValue.trim();
+    let checkInput: boolean = false;
     query += valueFirst
 
     if (regEx.test(valueFirst)) arrayOnlyNumbers.push(Number(valueFirst))
@@ -68,40 +69,47 @@ export class CalcComponent  {
 
       for (let i: number = 0; i < this.arrIds.length; i++){
 
-        let valueInputArray = this.document.getElementById(this.arrIds[i]).value.trim()
+        let valueInputArray:string = this.document.getElementById(this.arrIds[i]).value.trim()
+        if( valueInputArray === "") checkInput = true;
         query = query + ", " + valueInputArray;
         if (regEx.test(valueInputArray)) arrayOnlyNumbers.push(Number(valueInputArray))
 
       }
 
-      this.result = arrayOnlyNumbers.reduce((a, b) => a + b, 0);
-      let numbers: string = arrayOnlyNumbers.map(num => num.toString()).join(', ');
-      this.resultCalc = true;
+      if ( checkInput || valueFirst === ""){
 
-      jsonObject = {
-        clima: {
-        query: query,
-        numbers: numbers,
-        result: this.result
-        }
-      };
+        this.showMessage = " There is some EMPTY input!"
+        this.resetResponse(3000);
 
-      await this.apiService.postOne(jsonObject).then((res) => {
+      } else {
 
-        this.showMessage = `Your Query is: " ${res['query']} "`;
-        this.resetResponse(5000);
+        this.result = arrayOnlyNumbers.reduce((a, b) => a + b, 0);
+        let numbers: string = arrayOnlyNumbers.map(num => num.toString()).join(', ');
+        this.resultCalc = true;
 
-      }).catch((err) => {
-
-        if(err.error.query[0]){
-            this.showMessage = `Somme error happened: ${err.error.query[0]}. ${err.statusText}. Please try again.`;
-            this.resetResponse(3000);
-          } else {
-             this.showMessage = `Somme error happened: ${err.statusText}. Please try again.`;
-             this.resetResponse(3000);
+        jsonObject = {
+          clima: {
+            query: query,
+            numbers: numbers,
+            result: this.result
           }
-      });
+        };
+          await this.apiService.postOne(jsonObject).then((res) => {
 
+                  this.showMessage = `Your Query is: " ${res['query']} "`;
+                  this.resetResponse(5000);
+
+                }).catch((err) => {
+
+                  if(err.error.query[0]){
+                      this.showMessage = `Somme error happened: ${err.error.query[0]}. ${err.statusText}. Please try again.`;
+                      this.resetResponse(3000);
+                    } else {
+                      this.showMessage = `Somme error happened: ${err.statusText}. Please try again.`;
+                      this.resetResponse(3000);
+                    }
+                });
+      }
     } else {
 
       jsonObject = {
