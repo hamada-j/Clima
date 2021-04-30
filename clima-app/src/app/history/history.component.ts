@@ -25,7 +25,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
    }
 
   ngAfterViewInit() {
-    setTimeout(() => this.dataSource.paginator = this.paginator);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -46,8 +45,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     await this.api.getAllHistory().then(res => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-      console.log(res)
+      this.dataSource.sort = this.sort;
     }).catch((error) => console.log(error));
 
   }
