@@ -19,8 +19,8 @@ ul li {
   border-radius: 2px;
   position: relative;
   list-style: none;
-  width: 200px;
-  height: 60px;
+  width: 250px;
+  height: 150px;
   margin: 0px 20px;
 }
 ul li:before {
@@ -59,7 +59,7 @@ ul li span {
   justify-content: center;
   align-items: center;
   color: #fff;
-  font-size: 30px !important;
+  font-size: 40px !important;
   transition: 1.5s ease-out;
 }
 ul li:hover span {
