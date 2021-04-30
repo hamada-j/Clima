@@ -95,6 +95,7 @@ export class CalcComponent  {
           }
         };
         await this.apiService.postOne(jsonObject).then((res) => {
+          this.apiService.action$.emit('storage');
           this.localStorageItems(res['result'], res['query'])
           this.showMessage = `Your Query is: " ${res['query']} "`;
           this.resetResponse(5000);
@@ -119,7 +120,7 @@ export class CalcComponent  {
         }
       };
       await this.apiService.postOne(jsonObject).then((res) => {
-
+        this.apiService.action$.emit('storage');
         this.localStorageItems(null, res['query'])
         this.showMessage = `Your Query is: " ${res['query']} "`;
         this.resetResponse(5000);

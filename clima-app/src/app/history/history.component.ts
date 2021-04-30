@@ -39,13 +39,18 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
+     this.api.action$.subscribe(async getId => {
+      await this.callDataTable()
+    })
+    await this.callDataTable()
+  }
 
+  async callDataTable() {
     await this.api.getAllHistory().then(res => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }).catch((error) => console.log(error));
-
   }
 
 }
