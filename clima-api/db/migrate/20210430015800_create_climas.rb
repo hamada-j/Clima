@@ -3,10 +3,10 @@ class CreateClimas < ActiveRecord::Migration[6.1]
     create_table :climas do |t|
       t.text :query
       t.text :numbers
-      t.string :result
-      t.string :float
+      t.float :result
+      
 
-      t.timestamps
+      #t.timestamps
     end
   end
 end

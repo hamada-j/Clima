@@ -15,10 +15,7 @@ ActiveRecord::Schema.define(version: 2021_04_30_015800) do
   create_table "climas", charset: "utf8", force: :cascade do |t|
     t.text "query"
     t.text "numbers"
-    t.string "result"
-    t.string "float"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.float "result"
   end
 
 end
