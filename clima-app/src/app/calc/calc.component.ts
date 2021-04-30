@@ -143,7 +143,7 @@ export class CalcComponent  {
 
   getLastResultMethod($event){
     this.result = Number(parseFloat(localStorage.getItem('result')).toFixed(2));
-    this.showMessage = `Your Query is: " ${localStorage.getItem('query')} "`;
+    this.showMessage = `Your Last Query was: " ${localStorage.getItem('query')} "`;
     this.resultCalc = true;
     this.resetResponse(5000);
   }
