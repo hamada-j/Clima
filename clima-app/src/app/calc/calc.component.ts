@@ -39,6 +39,7 @@ export class CalcComponent  {
         let idInput = generateId();
         this.toAddElement.nativeElement.insertAdjacentHTML('beforeend', `<input type="text" id="${idInput}" ngModel />`);
         this.arrIds.push(idInput);
+        this.resultCalc = false;
       }
 
     }
@@ -50,6 +51,7 @@ export class CalcComponent  {
       let id = element.lastChild.id
       this.arrIds.splice(this.arrIds.indexOf(id), 1);
       element.removeChild(element.lastChild);
+      this.resultCalc = false;
     }
   }
 
