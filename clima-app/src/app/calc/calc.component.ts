@@ -83,7 +83,8 @@ export class CalcComponent  {
 
       } else {
 
-        this.result = arrayOnlyNumbers.reduce((a, b) => a + b, 0);
+        let sum: string = parseFloat(arrayOnlyNumbers.reduce((a, b) => a + b, 0).toString()).toFixed(2)
+        this.result = Number(sum);
         let numbers: string = arrayOnlyNumbers.map(num => num.toString()).join(', ');
         this.resultCalc = true;
 
@@ -141,7 +142,7 @@ export class CalcComponent  {
   }
 
   getLastResultMethod($event){
-    this.result = Number(localStorage.getItem('result'));
+    this.result = Number(parseFloat(localStorage.getItem('result')).toFixed(2));
     this.showMessage = `Your Query is: " ${localStorage.getItem('query')} "`;
     this.resultCalc = true;
     this.resetResponse(5000);
