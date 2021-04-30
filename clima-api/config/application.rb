@@ -21,6 +21,10 @@ Bundler.require(*Rails.groups)
 
 module ClimaApi
   class Application < Rails::Application
+
+    #add Config for CORS
+    config.hosts << "product.com"
+    
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
