@@ -3,7 +3,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
-import { History } from '../models/interfaceHistory'
+//import { History } from '../models/interfaceHistory'
+import { Clima } from '../models/clima'
 
 import { ApiService } from '../api.service';
 @Component({
@@ -14,7 +15,7 @@ import { ApiService } from '../api.service';
 export class HistoryComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['id', 'query', 'numbers', 'result'];
-  dataSource: MatTableDataSource<History>;
+  dataSource: MatTableDataSource<Clima>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -41,7 +42,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   async ngOnInit() {
 
-    // await this.api.getAllHistory().then(result => console.log(result)).catch((error) => console.log(error));
+    await this.api.getAllHistory().then(res => {
+      this.dataSource = new MatTableDataSource(res);
+      console.log(res)
+    }).catch((error) => console.log(error));
 
   }
 
