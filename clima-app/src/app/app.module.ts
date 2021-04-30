@@ -18,6 +18,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatInputModule} from '@angular/material/input';
     MatTabsModule,
     MatIconModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
