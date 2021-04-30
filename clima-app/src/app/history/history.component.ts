@@ -21,8 +21,8 @@ export class HistoryComponent implements OnInit {
         result: 3
       }
     }
-    await this.api.getAllHistory().then(result => console.log(result)).catch((error) => console.log(error));
-    await this.api.postOne(obj).then(result => console.log(result)).catch((error) => console.log(error));
+    // await this.api.getAllHistory().then(result => console.log(result)).catch((error) => console.log(error));
+    // await this.api.postOne(obj).then(result => console.log(result)).catch((error) => console.log(error));
 
   }
 

@@ -1,6 +1,8 @@
 import { Component, ElementRef, Inject,  Renderer2, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
+import { ApiService } from '../api.service';
+
 import { generateId } from '../utils/generateId';
 @Component({
   selector: 'app-calc',
@@ -14,10 +16,17 @@ export class CalcComponent  {
   result: number;
 
   @ViewChild('divInput') toAddElement:ElementRef;
-  constructor(private elementRef: ElementRef, private renderer: Renderer2, @Inject(DOCUMENT) private document) {
+  constructor(
+     private apiService: ApiService,
+     private elementRef: ElementRef,
+     private renderer: Renderer2,
+     @Inject(DOCUMENT)
+     private document) {
+
     this.arrIds = [];
     this.resultCalc = false;
     this.result = 0
+
   }
 
 
@@ -44,7 +53,7 @@ export class CalcComponent  {
     }
   }
 
-  onSubmit(formValues) {
+  async onSubmit(formValues) {
     const regEx = /^\d+\.\d+$|^\d+$/;
     let jsonObject: Object = {};
     let arrayOnlyNumbers: Array<number> = [];
@@ -62,20 +71,35 @@ export class CalcComponent  {
       let numbers = arrayOnlyNumbers.map(num => num.toString()).join(', ');
       this.resultCalc = true;
 
+
       jsonObject = {
+        clima: {
         query: query,
         numbers: numbers,
         result: this.result
-      }
-      console.log(jsonObject);
+        }
+      };
+
+      await this.apiService.postOne(jsonObject).then((res) => {
+        console.log(res)
+      }).catch((err) => {
+        console.log(err) });
 
     } else {
+
       jsonObject = {
+         clima: {
           query: query,
           numbers: null,
           result: null
+         }
         };
-        console.log(jsonObject);
+
+      await this.apiService.postOne(jsonObject).then((res) => {
+        console.log(res)
+      }).catch((err) => {
+        console.log(err) });
+
     }
 
   }
