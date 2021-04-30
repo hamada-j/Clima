@@ -33,7 +33,7 @@ export class CalcComponent  {
 
 
 
-     addElementMethod(e){
+     addElementMethod(e: unknown){
 
       if (this.arrIds.length < 50 ) {
         let idInput = generateId();
@@ -43,7 +43,7 @@ export class CalcComponent  {
 
     }
 
-  removeElementMethod(e){
+  removeElementMethod(e: unknown){
 
     if (this.arrIds.length > 0 ) {
       let element = this.document.getElementById('inputUser');
@@ -53,7 +53,7 @@ export class CalcComponent  {
     }
   }
 
-  async onSubmit(formValues) {
+  async onSubmit(formValues: any) {
 
     const regEx = /^\d+\.\d+$|^\d+$/;
     let jsonObject: Object = {};
