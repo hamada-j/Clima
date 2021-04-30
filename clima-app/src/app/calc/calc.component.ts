@@ -141,12 +141,12 @@ export class CalcComponent  {
 
   getLastResultMethod($event){
     this.result = Number(localStorage.getItem('result'));
-    this.showMessage = localStorage.getItem('query')
+    this.showMessage = `Your Query is: " ${localStorage.getItem('query')} "`;
     this.resultCalc = true;
     this.resetResponse(5000);
   }
 
-  localStorageItems(result, query) {
+  localStorageItems(result:string, query: string) {
     localStorage.setItem("result", result);
     localStorage.setItem("query", query);
   }
