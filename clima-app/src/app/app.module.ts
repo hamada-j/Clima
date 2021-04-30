@@ -22,7 +22,6 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 //import {MatPaginator} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import {MatTableDataSource} from '@angular/material/table';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableDataSource,
     //MatPaginator
   ],
   providers: [],
