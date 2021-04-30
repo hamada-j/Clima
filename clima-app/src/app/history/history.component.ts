@@ -38,8 +38,6 @@ export class HistoryComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-
   async ngOnInit() {
 
     await this.api.getAllHistory().then(res => {

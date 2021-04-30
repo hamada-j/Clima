@@ -31,24 +31,22 @@ export class CalcComponent  {
 
   }
 
+  addElementMethod(e: unknown){
 
-
-     addElementMethod(e: unknown){
-
-      if (this.arrIds.length < 50 ) {
-        let idInput = generateId();
-        this.toAddElement.nativeElement.insertAdjacentHTML('beforeend', `<input type="text" id="${idInput}" ngModel />`);
-        this.arrIds.push(idInput);
-        this.resultCalc = false;
-      }
-
+    if (this.arrIds.length < 50 ) {
+      let idInput: string = generateId();
+      this.toAddElement.nativeElement.insertAdjacentHTML('beforeend', `<input type="text" id="${idInput}" ngModel />`);
+      this.arrIds.push(idInput);
+      this.resultCalc = false;
     }
+
+  }
 
   removeElementMethod(e: unknown){
 
     if (this.arrIds.length > 0 ) {
-      let element = this.document.getElementById('inputUser');
-      let id = element.lastChild.id
+      let element: any = this.document.getElementById('inputUser');
+      let id: string= element.lastChild.id;
       this.arrIds.splice(this.arrIds.indexOf(id), 1);
       element.removeChild(element.lastChild);
       this.resultCalc = false;
@@ -63,7 +61,8 @@ export class CalcComponent  {
     let query: string = "";
     let valueFirst: string = formValues.userInputValue.trim();
     let checkInput: boolean = false;
-    query += valueFirst
+    this.resultCalc = false;
+    query += valueFirst;
 
     if (regEx.test(valueFirst)) arrayOnlyNumbers.push(Number(valueFirst))
 
@@ -71,13 +70,12 @@ export class CalcComponent  {
 
       for (let i: number = 0; i < this.arrIds.length; i++){
 
-        let valueInputArray:string = this.document.getElementById(this.arrIds[i]).value.trim()
+        let valueInputArray:string = this.document.getElementById(this.arrIds[i]).value.trim();
         if( valueInputArray === "") checkInput = true;
         query = query + ", " + valueInputArray;
-        if (regEx.test(valueInputArray)) arrayOnlyNumbers.push(Number(valueInputArray))
+        if (regEx.test(valueInputArray)) arrayOnlyNumbers.push(Number(valueInputArray));
 
       }
-
       if ( checkInput || valueFirst === ""){
 
         this.showMessage = " There is some EMPTY input!"
@@ -96,39 +94,36 @@ export class CalcComponent  {
             result: this.result
           }
         };
-          await this.apiService.postOne(jsonObject).then((res) => {
+        await this.apiService.postOne(jsonObject).then((res) => {
 
-                  this.showMessage = `Your Query is: " ${res['query']} "`;
-                  this.resetResponse(5000);
+          this.showMessage = `Your Query is: " ${res['query']} "`;
+          this.resetResponse(5000);
 
-                }).catch((err) => {
-
-                  if(err.error.query[0]){
-                      this.showMessage = `Somme error happened: ${err.error.query[0]}. ${err.statusText}. Please try again.`;
-                      this.resetResponse(3000);
-                    } else {
-                      this.showMessage = `Somme error happened: ${err.statusText}. Please try again.`;
-                      this.resetResponse(3000);
-                    }
-                });
+        }).catch((err) => {
+            if(err.error.query[0]){
+                this.showMessage = `Somme error happened: ${err.error.query[0]}. ${err.statusText}. Please try again.`;
+                this.resetResponse(3000);
+            } else {
+                this.showMessage = `Somme error happened: ${err.statusText}. Please try again.`;
+                this.resetResponse(3000);
+            }
+        });
       }
     } else {
 
       jsonObject = {
-         clima: {
+        clima: {
           query: query,
           numbers: null,
           result: null
-         }
-        };
-
+        }
+      };
       await this.apiService.postOne(jsonObject).then((res) => {
 
-         this.showMessage = `Your Query is: " ${res['query']} "`;
-         this.resetResponse(5000);
+        this.showMessage = `Your Query is: " ${res['query']} "`;
+        this.resetResponse(5000);
 
       }).catch((err) => {
-
           if(err.error.query[0]){
             this.showMessage = `Somme error happened: ${err.error.query[0]}. ${err.statusText}. Please try again.`;
             this.resetResponse(3000);
@@ -136,7 +131,7 @@ export class CalcComponent  {
             this.showMessage = `Somme error happened: ${err.statusText}. Please try again.`;
             this.resetResponse(3000);
           }
-          });
+      });
 
     }
 
@@ -147,9 +142,4 @@ export class CalcComponent  {
       this.showMessage = ""
     }, time);
   }
-
-
-
-
-
 }
