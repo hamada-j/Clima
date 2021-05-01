@@ -12,6 +12,7 @@ import { localStorageItems } from '../utils/localStorageItems';
 import { returnErrorText } from '../utils/returnError';
 import { returnElementDOM } from '../utils/returnInputDOM';
 import { returnLimit } from '../utils/returnLimit';
+
 @Component({
   selector: 'app-calc',
   templateUrl: './calc.component.html',
