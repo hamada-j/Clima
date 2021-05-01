@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/common';
 import { ApiService } from '../api.service';
 
 import { generateId } from '../utils/generateId';
+import { localStorageItems } from '../utils/localStorageItems';
 @Component({
   selector: 'app-calc',
   templateUrl: './calc.component.html',
@@ -100,7 +101,7 @@ export class CalcComponent  {
         };
         await this.apiService.postOne(jsonObject).then((res) => {
           this.apiService.action$.emit('storage');
-          this.localStorageItems(res['result'], res['query'])
+          localStorageItems(res['result'], res['query'])
           this.showMessage = `Your Query is: " ${res['query']} "`;
           this.resetResponse(5000);
 
@@ -125,7 +126,7 @@ export class CalcComponent  {
       };
       await this.apiService.postOne(jsonObject).then((res) => {
         this.apiService.action$.emit('storage');
-        this.localStorageItems(null, res['query'])
+        localStorageItems(null, res['query'])
         this.showMessage = `Your Query is: " ${res['query']} "`;
         this.resetResponse(5000);
 
@@ -149,11 +150,6 @@ export class CalcComponent  {
     this.showMessage = `Your Last Query was: " ${localStorage.getItem('query')} "`;
     this.resultCalc = true;
     this.resetResponse(5000);
-  }
-
-  localStorageItems(result:string, query: string) {
-    localStorage.setItem("result", result);
-    localStorage.setItem("query", query);
   }
 
   resetResponse(time: number){

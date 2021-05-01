@@ -14,6 +14,7 @@ import { ApiService } from '../api.service';
 })
 export class HistoryComponent implements OnInit, AfterViewInit {
 
+  showMessage: string;
   displayedColumns: string[] = ['id', 'query', 'numbers', 'result'];
   dataSource: MatTableDataSource<Clima>;
 
@@ -22,6 +23,7 @@ export class HistoryComponent implements OnInit, AfterViewInit {
 
   constructor(private api: ApiService) {
     this.dataSource = new MatTableDataSource([]);
+    this.showMessage = "";
    }
 
   ngAfterViewInit() {
@@ -39,10 +41,10 @@ export class HistoryComponent implements OnInit, AfterViewInit {
   }
 
   async ngOnInit() {
-     this.api.action$.subscribe(async getId => {
-      await this.callDataTable()
+     this.api.action$.subscribe(async () => {
+      await this.callDataTable();
     })
-    await this.callDataTable()
+    await this.callDataTable();
   }
 
   async callDataTable() {
@@ -50,7 +52,15 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    }).catch((error) => console.log(error));
+    }).catch((err) => {
+        this.showMessage = `Somme error happened: ${err.statusText}.`;
+        this.resetResponse(3000);
+      });
+  }
+    resetResponse(time: number){
+    setTimeout(async () => {
+      this.showMessage = ""
+    }, time);
   }
 
 }
