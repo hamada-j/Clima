@@ -4,9 +4,10 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
 //import { History } from '../models/interfaceHistory'
-import { Clima } from '../models/clima'
+import { Clima } from '../models/clima';
 
 import { ApiService } from '../api.service';
+import { returnErrorText } from '../utils/returnError';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -53,13 +54,13 @@ export class HistoryComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }).catch((err) => {
-        this.showMessage = `Somme error happened: ${err.statusText}.`;
+        this.showMessage = returnErrorText(err.statusText);
         this.resetResponse(3000);
       });
   }
     resetResponse(time: number){
     setTimeout(async () => {
-      this.showMessage = ""
+      this.showMessage = "";
     }, time);
   }
 

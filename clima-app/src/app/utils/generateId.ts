@@ -1,4 +1,4 @@
-export function generateId() {
+export function generateId(): string{
 
     const ALPHABET: string = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const ID_LENGTH: number = 6;

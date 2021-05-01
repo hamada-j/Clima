@@ -1,10 +1,17 @@
 import { Component, ElementRef, Inject,  Renderer2, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
+// should be change in Production
+// import { environment } from "../environments/environment.prod";
+import { environment } from "../../environments/environment";
+
 import { ApiService } from '../api.service';
 
 import { generateId } from '../utils/generateId';
 import { localStorageItems } from '../utils/localStorageItems';
+import { returnErrorText } from '../utils/returnError';
+import { returnElementDOM } from '../utils/returnInputDOM';
+import { returnLimit } from '../utils/returnLimit';
 @Component({
   selector: 'app-calc',
   templateUrl: './calc.component.html',
@@ -27,20 +34,20 @@ export class CalcComponent  {
 
     this.arrIds = [];
     this.resultCalc = false;
-    this.result = 0
+    this.result = 0;
     this.showMessage = "";
 
   }
 
   addElementMethod(e: unknown){
-
-    if (this.arrIds.length < 51 ) {
+    let limit: number = 51
+    if (this.arrIds.length < limit ) {
       let idInput: string = generateId();
-      this.toAddElement.nativeElement.insertAdjacentHTML('beforeend', `<input type="text" id="${idInput}" ngModel />`);
+      this.toAddElement.nativeElement.insertAdjacentHTML('beforeend', returnElementDOM(idInput));
       this.arrIds.push(idInput);
       this.resultCalc = false;
     }else{
-      this.showMessage = " Accept only 50 input. If you need more contacts with admin to allow it."
+      this.showMessage = returnLimit(limit);
       this.resetResponse(5000);
     }
 
@@ -81,7 +88,7 @@ export class CalcComponent  {
 
       }
       if ( checkInput || valueFirst === ""){
-
+        // Show user witch ones it is empty (( TO DO ))
         this.showMessage = " There is some EMPTY input!"
         this.resetResponse(3000);
 
@@ -107,10 +114,10 @@ export class CalcComponent  {
 
         }).catch((err) => {
             if(err.error.query[0]){
-                this.showMessage = `Somme error happened: ${err.error.query[0]}. ${err.statusText}. Please try again.`;
+                this.showMessage = returnErrorText(`${err.error.query[0]}. ${err.statusText}`);
                 this.resetResponse(3000);
             } else {
-                this.showMessage = `Somme error happened: ${err.statusText}. Please try again.`;
+                this.showMessage = returnErrorText(err.statusText);
                 this.resetResponse(3000);
             }
         });
@@ -125,7 +132,7 @@ export class CalcComponent  {
         }
       };
       await this.apiService.postOne(jsonObject).then((res) => {
-        this.apiService.action$.emit('storage');
+        this.apiService.action$.emit(environment.emit);
         localStorageItems(null, res['query'])
         this.showMessage = `Your Query is: " ${res['query']} "`;
         this.resetResponse(5000);
@@ -133,10 +140,10 @@ export class CalcComponent  {
 
       }).catch((err) => {
           if(err.error.query[0]){
-            this.showMessage = `Somme error happened: ${err.error.query[0]}. ${err.statusText}. Please try again.`;
+            this.showMessage = returnErrorText(`${err.error.query[0]}. ${err.statusText}`);
             this.resetResponse(3000);
           } else {
-            this.showMessage = `Somme error happened: ${err.statusText}. Please try again.`;
+            this.showMessage = returnErrorText(err.statusText);;
             this.resetResponse(3000);
           }
       });
@@ -145,9 +152,9 @@ export class CalcComponent  {
 
   }
 
-  getLastResultMethod($event){
-    this.result = Number(parseFloat(localStorage.getItem('result')).toFixed(2));
-    this.showMessage = `Your Last Query was: " ${localStorage.getItem('query')} "`;
+  getLastResultMethod($event: unknown){
+    this.result = Number(parseFloat(localStorage.getItem(environment.result)).toFixed(2));
+    this.showMessage = `Your Last Query was: " ${localStorage.getItem(environment.query)} "`;
     this.resultCalc = true;
     this.resetResponse(5000);
   }
