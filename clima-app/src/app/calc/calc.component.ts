@@ -33,11 +33,14 @@ export class CalcComponent  {
 
   addElementMethod(e: unknown){
 
-    if (this.arrIds.length < 50 ) {
+    if (this.arrIds.length < 51 ) {
       let idInput: string = generateId();
       this.toAddElement.nativeElement.insertAdjacentHTML('beforeend', `<input type="text" id="${idInput}" ngModel />`);
       this.arrIds.push(idInput);
       this.resultCalc = false;
+    }else{
+      this.showMessage = " Accept only 50 input. If you need more contacts with admin to allow it."
+      this.resetResponse(5000);
     }
 
   }
