@@ -11,19 +11,19 @@
       <td mat-cell *matCellDef="let row">{{ row.id }}</td>
     </ng-container>
 
-    <!-- Progress Column -->
+    <!-- Query Column -->
     <ng-container matColumnDef="query">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Query</th>
       <td mat-cell *matCellDef="let row">{{ row.query }}</td>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Numbers Column -->
     <ng-container matColumnDef="numbers">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Numbers</th>
       <td mat-cell *matCellDef="let row">{{ row.numbers }}</td>
     </ng-container>
 
-    <!-- Color Column -->
+    <!-- Result Column -->
     <ng-container matColumnDef="result">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Result</th>
       <td mat-cell *matCellDef="let row" [style.color]="row.color">
