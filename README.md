@@ -9,4 +9,4 @@ build a Full-Stack web app to calc all numeric params in a list. User will be ab
 - A form view to add several values (one per field, no limit), send them to /calc endpoint and, then, show the result.
 - A list view with all previous queries.
 
-- Returning to an Old Stable Version: ee1488e
+
